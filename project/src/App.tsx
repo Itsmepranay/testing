@@ -1,23 +1,14 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { ProductProvider } from './context/ProductContext';
+import { HeroProvider } from './context/HeroContext';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Home from './pages/Home';
-import Products from './pages/Products';
-import ProductDetail from './pages/ProductDetail';
-import Collections from './pages/Collections';
-import Contact from './pages/Contact';
 import AdminPanel from './pages/Admin/AdminPanel';
 
 const AppContent: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith('/admin-secret-panel');
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-  };
+  const isAdminRoute = location.pathname.startsWith('/admin-coconut-dashboard');
 
   if (isAdminRoute) {
     return <AdminPanel />;
@@ -25,15 +16,10 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onSearch={handleSearch} />
+      <Header />
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products searchQuery={searchQuery} />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/collections" element={<Collections />} />
-          <Route path="/collections/:collection" element={<Products />} />
-          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
       <Footer />
@@ -43,11 +29,11 @@ const AppContent: React.FC = () => {
 
 function App() {
   return (
-    <ProductProvider>
+    <HeroProvider>
       <Router>
         <AppContent />
       </Router>
-    </ProductProvider>
+    </HeroProvider>
   );
 }
 

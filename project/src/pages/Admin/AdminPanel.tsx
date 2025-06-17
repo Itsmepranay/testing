@@ -7,7 +7,7 @@ const AdminPanel: React.FC = () => {
 
   useEffect(() => {
     // Check if user is already logged in
-    const adminSession = localStorage.getItem('adminSession');
+    const adminSession = localStorage.getItem('coconutAdminSession');
     if (adminSession) {
       setIsAuthenticated(true);
     }
@@ -15,9 +15,9 @@ const AdminPanel: React.FC = () => {
 
   const handleLogin = (username: string, password: string): boolean => {
     // Simple authentication - in production, this should be secure
-    if (username === 'admin' && password === 'catalog123') {
+    if (username === 'coconut' && password === 'admin2024') {
       setIsAuthenticated(true);
-      localStorage.setItem('adminSession', 'true');
+      localStorage.setItem('coconutAdminSession', 'true');
       return true;
     }
     return false;
@@ -25,7 +25,7 @@ const AdminPanel: React.FC = () => {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('adminSession');
+    localStorage.removeItem('coconutAdminSession');
   };
 
   if (!isAuthenticated) {
